@@ -1,33 +1,27 @@
 package ListAndSort.test6;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
+//和最长连续递增及其相似
 public class Solution {
-    public String getPermutation(int n, int k) {
-        StringBuilder builder = new StringBuilder();
-        ArrayList<Integer> integerArrayList = new ArrayList<Integer>();
-        for(int i = 1 ; i <= n ; i ++) {
-            integerArrayList.add(i);
+    public int longestConsecutive(int[] nums) {
+        Arrays.sort(nums);
+        int j = 0;
+        int max = 1;
+        if(nums.length == 0 || nums == null)
+            return 0;
+        for(int i = 0 ; i < nums.length ;  i ++) {
+            if (i != nums.length - 1 && (nums[i] == nums[i + 1] - 1 || nums[i] == nums[i + 1] ));
+            else {
+                max = Math.max(i - j + 1 , max);
+                j = i + 1;
+            }
         }
-        int temp = k;
-        for(int i = n ; i > 0 ; i --) {
-              int index = temp / (factorial(i -1));                 //这边求索引的时候会出点问题，在于正好是阶乘的整数倍的时候
-              if(temp % (factorial(i -1)) == 0) {
-                  index -- ;
-              }
-              temp = temp -  index * factorial(i -1);                  //这步比较关键，不是简简单单地用除
-              builder.append(integerArrayList.get(index));
-              integerArrayList.remove(index);
-        }
-        return builder.toString();
+        return max;
     }
-    public static int factorial(int number) {
-        int result = 1;
-
-        for (int factor = 2; factor <= number; factor++) {
-            result *= factor;
-        }
-
-        return result;
+    public static void main(String args[]) {
+        Solution solution = new Solution();
+        int[] nums = {0,0};
+        solution.longestConsecutive(nums);
     }
 }
