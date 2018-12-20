@@ -1,7 +1,11 @@
 package GreedyAndDynamic.test3;
 
 /**
- * DFS,深度优先遍历，先往纵向一直遍历，再往横向遍历。得出最终是正方形的条件：纵向的次数乘以 （纵向的次数+1）（即正方形的长度）等于横向的次数
+ * DFS,深度优先遍历，先往纵向一直遍历，再往横向遍历。得出最终是正方形的条件：纵向的次数乘以 （纵向的次数+1）（即正方形的长度）等于横向的次数. 思想错误了
+ */
+
+/**
+ * 麻烦的解法，通过，但效率低。
  */
 public class Solution {
     public int maximalSquare(char[][] matrix) {
@@ -19,8 +23,15 @@ public class Solution {
                             break;
                         deepth ++;
                     }
-                    if (j + deepth <= matrix[0].length && isValid(deepth , i , j , matrix))
-                        max = Math.max(deepth * deepth , max);
+                    if (deepth == 1)
+                        max = Math.max(1 , max);
+                    if (deepth > matrix[0].length) deepth = matrix[0].length;                            //这步需要注意一下
+                    for (int l = deepth ; l > 1 ; l --) {                                                //必须对每一个最大深度都要检查一遍
+                        if (j + deepth <= matrix[0].length && isValid(l , i , j , matrix)) {
+                            max = Math.max(l * l , max);
+                            break;
+                        }
+                    }
                 }
 
             }
@@ -41,7 +52,8 @@ public class Solution {
         return flag;
     }
     public static void main(String args[]) {
-        char[][] matrix = {{'0','0','1','0'},{'1','1','1','1'},{'1','1','1','1'},{'1','1','1','0'},{'1','1','0','0'},{'1','1','1','1'},{'1','1','1','0'}};
+        //char[][] matrix = {{'0','0','1','0'},{'1','1','1','1'},{'1','1','1','1'},{'1','1','1','0'},{'1','1','0','0'},{'1','1','1','1'},{'1','1','1','0'}};
+        char[][] matrix = {{'1','1','0','1'},{'1','1','0','1'},{'1','1','1','1'}};
         Solution solution = new Solution();
         solution.maximalSquare(matrix);
     }
