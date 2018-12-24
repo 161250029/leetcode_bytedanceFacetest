@@ -11,7 +11,9 @@ public class Solution {
         if(nums.length == 0 || nums == null)
             return 0;
         for(int i = 0 ; i < nums.length ;  i ++) {
-            if (i != nums.length - 1 && (nums[i] == nums[i + 1] - 1 || nums[i] == nums[i + 1] ));
+            if (i != nums.length - 1 && nums[i] == nums[i + 1] - 1 );
+            else if (i != nums.length - 1 && nums[i] == nums[i + 1])
+                j ++ ;                                                     //相等的时候往后退一格，保持长度不变  ,之前忽略了这种情况。 想了想后修改了一下。
             else {
                 max = Math.max(i - j + 1 , max);
                 j = i + 1;

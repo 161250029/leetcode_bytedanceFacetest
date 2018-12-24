@@ -1,5 +1,8 @@
 package ListAndSort.test10;
 
+/**
+ * 会有漏解
+ */
 public class Solution {
     public int trap(int[] height) {
          int result = 0 ;
